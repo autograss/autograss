@@ -51,7 +51,7 @@ while True:
 
 	
 	# The car will drive forward when the "w" key is pressed
-	if(char == "w"):
+	if(char == "s"):
 	
 		# synchronize after a turning the motor speed
 			
@@ -62,9 +62,11 @@ while True:
 			# speedright = speedleft
 				
 		# accelerate the RaPi car
-		speedleft = speedleft + 0.1
-		speedright = speedright + 0.1
-
+		#speedleft = speedleft + 0.1
+		#speedright = speedright + 0.1
+		speedleft = 0.8
+		speedright = 0.8
+		
 		if speedleft > 1:
 			speedleft = 1
 		if speedright > 1:
@@ -75,7 +77,7 @@ while True:
 		printscreen()
 
     # The car will reverse when the "s" key is pressed
-	if(char == "s"):
+	if(char == "w"):
 	
 		# synchronize after a turning the motor speed
 			
@@ -86,8 +88,11 @@ while True:
 			# speedright = speedleft
 			
 		# slow down the RaPi car
-		speedleft = speedleft - 0.1
-		speedright = speedright - 0.1
+		#speedleft = speedleft - 0.1
+		#speedright = speedright - 0.1
+		
+		speedleft = -0.8
+		speedright = -0.8
 
 		if speedleft < -1:
 			speedleft = -1
@@ -109,8 +114,11 @@ while True:
     # The "d" key will toggle the steering right
 	if(char == "d"):		
 		#if speedright > speedleft:
-		speedright = speedright - 0.1
-		speedleft = speedleft + 0.1
+		#speedright = speedright - 0.1
+		#speedleft = speedleft + 0.1
+		
+		speedright = -0.4
+		speedleft = -0.7
 		
 		if speedright < -1:
 			speedright = -1
@@ -125,8 +133,8 @@ while True:
     # The "a" key will toggle the steering left
 	if(char == "a"):
 		#if speedleft > speedright:
-		speedleft = speedleft - 0.1
-		speedright = speedright + 0.1
+		speedleft = - 0.4
+		speedright = - 0.7
 			
 		if speedleft < -1:
 			speedleft = -1
@@ -137,7 +145,39 @@ while True:
 		HBridge.setMotorLeft(speedleft)
 		HBridge.setMotorRight(speedright)
 		printscreen()
+	
+	# The "y" key will hard turn left
+	if(char == "y"):
+		#if speedleft > speedright:
+		speedleft = 0
+		speedright = - 0.8
+			
+		if speedleft < -1:
+			speedleft = -1
 		
+		if speedright > 1:
+			speedright = 1
+		
+		HBridge.setMotorLeft(speedleft)
+		HBridge.setMotorRight(speedright)
+		printscreen()
+	
+	# The "c" key will hard turn right
+	if(char == "c"):
+		#if speedleft > speedright:
+		speedleft = - 0.8
+		speedright = - 0
+			
+		if speedleft < -1:
+			speedleft = -1
+		
+		if speedright > 1:
+			speedright = 1
+		
+		HBridge.setMotorLeft(speedleft)
+		HBridge.setMotorRight(speedright)
+		printscreen()
+	
 	# The "x" key will break the loop and exit the program
 	if(char == "x"):
 		HBridge.setMotorLeft(0)
