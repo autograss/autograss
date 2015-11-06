@@ -1,9 +1,13 @@
 #! /usr/bin/python
 
+import sys
+sys.path.insert(0, 'motor_control/')
 from os import path
 import commands
 import time
 from photo import Photo
+from move_control import MoveControl
+
 
 class AutoGrass:
 
