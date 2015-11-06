@@ -28,6 +28,11 @@ def move(direction):
         rotate_right()
 
 
+def exit():
+    stop_move()
+    base_control.exit()
+
+
 def stop_move():
     speed_left = 0.0
     speed_right = 0.0
