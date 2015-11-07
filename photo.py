@@ -2,7 +2,7 @@
 import os
 import time
 import subprocess
-import picamera
+#import picamera
 
 class Photo:
 
@@ -13,13 +13,16 @@ class Photo:
         self.img_name = 'direction.jpg'
 
 
-    def take_photo(self):
-        start_time2 = time.time()
+    def take_photo_with_raspistill(self):
+        rasp_cmd = "raspistill -o " + self.path + self.options() + ' -t 300'
+        subprocess.call([rasp_cmd], shell=True)
+
+    def take_photo_with_picamera(self):
+        """docstring for take_photo_with_raspistill"""
         camera = picamera.PiCamera()
         camera.resolution = (self.width, self.height)
         camera.framerate = 30
         camera.capture_sequence([self.path()])
-        print("%s seconds foto" % (time.time() - start_time2))
 
     def path(self):
         return 'photos/' + self.img_name
@@ -36,4 +39,3 @@ class Photo:
 
     def _rotate(self):
         return ' -rot ' + self.rotate
-
