@@ -13,13 +13,11 @@ class AutoGrass:
 
     def direction(self):
         photo = Photo(1024,768,'0')
-        photo.take_photo()
+        photo.take_photo_with_picamera()
         movementalgorithm = "../movementalgorithm/bin/movimentalgorithm"
-        start_time1 = time.time()
-        direction = commands.getoutput(movementalgorithm + ' ' +  photo.path())
-        print("%s seconds processamento" % (time.time() - start_time1))
-        print direction
-
+        direction = str(commands.getoutput(movementalgorithm + ' ' + photo.path()))
+        control = MoveControl()
+        control.move(direction)
 
 def main():
     start_time = time.time()

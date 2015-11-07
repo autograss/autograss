@@ -2,7 +2,7 @@
 import os
 import time
 import subprocess
-#import picamera
+import picamera
 
 class Photo:
 
@@ -18,7 +18,6 @@ class Photo:
         subprocess.call([rasp_cmd], shell=True)
 
     def take_photo_with_picamera(self):
-        """docstring for take_photo_with_raspistill"""
         camera = picamera.PiCamera()
         camera.resolution = (self.width, self.height)
         camera.framerate = 30
