@@ -1,21 +1,24 @@
 #!/usr/bin/python
 import os
 import time
-import subprocess
+from subprocess import call
 import picamera
+from os import listdir
+from os.path import isfile, join
 
 class Photo:
 
-    def __init__(self,width,height,rotate):
+    def __init__(self,width,height,rotate,framerate):
         self.width  = width
         self.height = height
         self.rotate = rotate
+        self.framerate = framerate
         self.img_name = 'direction.jpg'
 
 
     def take_photo_with_raspistill(self):
         rasp_cmd = "raspistill -o " + self.path + self.options() + ' -t 300'
-        subprocess.call([rasp_cmd], shell=True)
+        call([rasp_cmd], shell=True)
 
     def take_photo_with_picamera(self):
         camera = picamera.PiCamera()
@@ -39,3 +42,8 @@ class Photo:
 
     def _rotate(self):
         return ' -rot ' + self.rotate
+
+    def use_photos_test_images(self):
+        img_path = 'photos_test'
+        images = [f for f in listdir(img_path) if isfile(join(img_path))]
+        return images
