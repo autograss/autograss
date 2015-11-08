@@ -45,5 +45,8 @@ class Photo:
 
     def use_photos_test_images(self):
         img_path = 'photos_test'
-        images = [f for f in listdir(img_path) if isfile(join(img_path))]
-        return images
+        images = [f for f in listdir(img_path)]
+        full_img = []
+        for i in range(50):
+            full_img.append(images[3])
+        return full_img
