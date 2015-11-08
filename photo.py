@@ -22,6 +22,7 @@ class Photo:
         camera.resolution = (self.width, self.height)
         camera.framerate = 30
         camera.capture_sequence([self.path()])
+        camera.close()
 
     def path(self):
         return 'photos/' + self.img_name
