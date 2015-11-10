@@ -20,20 +20,20 @@ class AutoGrass:
             self.move_robot(photo)
             i+=1
 
-    def move_robot(self, photo):
+    def move_robot(self, photo, control):
         movementalgorithm = "../movementalgorithm/bin/movimentalgorithm"
         direction = str(commands.getoutput(movementalgorithm + ' ' + photo.path()))
         print "direction: " + direction
-        control = MoveControl()
         control.move(direction)
 
     def direction_without_camera(self):
         photo = Photo(1024,768,'0',30)
+        control = MoveControl()
         images = photo.use_photos_test_images()
         for image in images:
             cmd = 'cp photos_test/%s photos/direction.jpg' % image
             system(cmd)
-            self.move_robot(photo)
+            self.move_robot(photo, control)
 
 def main():
     start_time = time.time()
