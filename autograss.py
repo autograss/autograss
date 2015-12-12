@@ -35,11 +35,31 @@ class AutoGrass:
             system(cmd)
             self.move_robot(photo)
 
+
+    def photo_test(self):
+        frames = 60
+        camera = picamera.PiCamera()
+        camera.resolution = (1024, 768)
+        camera.framerate = 30
+        camera.start_preview()
+        # Give the camera some warm-up time
+        time.sleep(2)
+        start = time.time()
+        camera.capture_sequence([
+            'image%02d.jpg' % i
+            for i in range(frames)], use_video_port=True)
+        finish = time.time()
+        print('Captured %d frames at %.2ffps' % (
+            frames,
+            frames / (finish - start)
+            ))
+
+
 def main():
     start_time = time.time()
     #AutoGrass.direction_without_camera()
     autograss = AutoGrass()
-    autograss.direction()
+    autograss.photos_test()
     print("%s seconds" % (time.time() - start_time))
 
 if __name__ == '__main__':
